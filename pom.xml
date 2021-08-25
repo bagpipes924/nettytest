@@ -1,0 +1,82 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.emqx</groupId>
+  <artifactId>nettytest</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>nettytest</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <logback.version>1.2.4</logback.version>
+    <slf4j.version>1.7.32</slf4j.version>
+  </properties>
+
+  <dependencies>
+  	<dependency>
+	    <groupId>com.esotericsoftware.yamlbeans</groupId>
+	    <artifactId>yamlbeans</artifactId>
+	    <version>1.15</version>
+	</dependency>
+	<dependency>
+	    <groupId>io.netty</groupId>
+	    <artifactId>netty-all</artifactId>
+	    <version>4.1.66.Final</version>
+	</dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-api</artifactId>
+		<version>${slf4j.version}</version>
+		<scope>compile</scope>
+	</dependency>
+	<dependency>
+		<groupId>ch.qos.logback</groupId>
+		<artifactId>logback-core</artifactId>
+		<version>${logback.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>ch.qos.logback</groupId>
+		<artifactId>logback-classic</artifactId>
+		<version>${logback.version}</version>
+	</dependency>
+	<!-- https://mvnrepository.com/artifact/com.aliyun/gmsse  -->
+	<dependency>
+	    <groupId>com.aliyun</groupId>
+	    <artifactId>gmsse</artifactId>
+	    <version>1.1.0</version>
+	</dependency> 
+	<dependency>
+	    <groupId>com.emqx.gmssl</groupId>
+	    <artifactId>gmsse</artifactId>
+	    <version>1.0</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.emqx.gmssl</groupId>
+	    <artifactId>gmjce</artifactId>
+	    <version>1.0</version>
+	</dependency>
+	<!--
+	<dependency>
+	    <groupId>com.gmssl</groupId>
+	    <artifactId>gmssl_provider</artifactId>
+	    <version>1.0</version>
+	</dependency>
+	-->
+	<dependency>
+	    <groupId>org.bouncycastle</groupId>
+	    <artifactId>bcprov-jdk15on</artifactId>
+	    <version>1.69</version>
+	</dependency>
+	
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
