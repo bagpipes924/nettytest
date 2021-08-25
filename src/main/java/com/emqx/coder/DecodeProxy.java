@@ -23,6 +23,7 @@ public class DecodeProxy extends ByteToMessageDecoder{
 	private String mode;
 	
 	
+	
 	public DecodeProxy(String mode) {
 		this.mode = mode;
 	}
