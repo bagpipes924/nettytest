@@ -31,7 +31,6 @@ public class NettyServer implements Runnable {
 	private final EventLoopGroup group = new NioEventLoopGroup();
 	private Proxy config;
 	private SSLContext sslContext=null;
-
 	public NettyServer(Proxy config) {
 		this.config = config;
 	}
@@ -45,11 +44,13 @@ public class NettyServer implements Runnable {
 				
 				if(config.isVerifyClient()) {
 					//sslContext=SSLUtil.getSslContext(config.getCertFile(),config.getKeyPassword());
-					sslContext=SslContextFactory.getGMContext2(config.getKeyFile(),config.getCertFile(), config.getKeyPassword());
+					//sslContext=SslContextFactory.getGMContext2(config.getKeyFile(),config.getCertFile(), config.getKeyPassword());
+					sslContext=SslContextFactory.getGMContext(config.getPfxFile(), config.getRootCAFile(), config.getMiddleCAFile(), config.getKeyPassword());
 					logger.info("监听端口:"+config.getProxyPort()+"采用 ssh双向认证");
 				}else {
 					//sslContext=SSLUtil.getSslContext(config.getCertFile(),config.getKeyPassword());
-					sslContext=SslContextFactory.getGMContext2(config.getKeyFile(),null, config.getKeyPassword());
+					//sslContext=SslContextFactory.getGMContext2(config.getKeyFile(),null, config.getKeyPassword());
+					sslContext=SslContextFactory.getGMContext(config.getPfxFile(), config.getRootCAFile(), config.getMiddleCAFile(), config.getKeyPassword());
 					logger.info("监听端口:"+config.getProxyPort()+"采用 ssh单向认证");
 				}
 			}
@@ -64,6 +65,7 @@ public class NettyServer implements Runnable {
 					if(sslContext!=null) {
 						//SSLEngine engine=sslContext.newEngine(ch.alloc());
 						SSLEngine engine=sslContext.createSSLEngine();
+						engine.setEnabledProtocols("GMSSLv1.1".split(","));
 						// 设置服务端模式
 						engine.setUseClientMode(false);
 						// 需要验证客户端身份,如果是双向验证，需要设为true

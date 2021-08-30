@@ -57,10 +57,10 @@ public class TcpProxyServer {
 				
 				if (config.isVerifyClient()) {
 					//sslCtx = SslContextFactory.getServerContext(config.getCertFile(),config.getCertFile(),config.getKeyPassword());
-					sslCtx=SslContextFactory.getContext(config.getKeyFile(),config.getCertFile(), config.getKeyPassword());
+					sslCtx=SslContextFactory.getContext(config.getPfxFile(),config.getRootCAFile(), config.getKeyPassword());
 				}else {
 					//sslCtx = SslContextFactory.getServerContext(config.getCertFile(),null,config.getKeyPassword());
-					sslCtx=SslContextFactory.getContext(config.getKeyFile(),null, config.getKeyPassword());
+					sslCtx=SslContextFactory.getContext(config.getPfxFile(),null, config.getKeyPassword());
 				}
 				
 				/*

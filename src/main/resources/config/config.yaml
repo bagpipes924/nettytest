@@ -1,22 +1,24 @@
 port: 80
 proxys:
-   -  serverIp: 122.112.237.20 #emqx ip
+   -  serverIp: 192.168.154.121 #emqx ip
       serverPort: 18083 #emqx port
       proxyPort: 18083 #代理的监听端口
       mode: http #http,ws,tcp
       ssl: true #是否启动认证
-      verifyClient: true #是否双向认证
-      certFile: /Users/bagpipes/Downloads/GM.Example/keystore/sm2.server1.both.pfx #证书 pfx文件
-      keyFile: /Users/bagpipes/Downloads/GM.Example/keystore/sm2.server1.both.pfx #密钥pfx文件
+      verifyClient: false #是否双向认证
+      pfxFile: /Users/bagpipes/Downloads/GM.Example/keystore/sm2.server1.both.pfx
+      rootCAFile: /Users/bagpipes/Downloads/caifen/server1.rca.pem
+      middleCAFile: /Users/bagpipes/Downloads/caifen/server1.oca.pem 
       keyPassword: 12345678 #证书密码
-   -  serverIp: 122.112.237.20
+   -  serverIp: 192.168.154.121
       serverPort: 1883
       proxyPort: 1883
       mode: tcp
       ssl: true
       verifyClient: true
-      certFile: /Users/bagpipes/Downloads/GM.Example/keystore/sm2.server1.both.pfx
-      keyFile: /Users/bagpipes/Downloads/GM.Example/keystore/sm2.server1.both.pfx
+      pfxFile: /Users/bagpipes/Downloads/GM.Example/keystore/sm2.server1.both.pfx
+      rootCAFile: /Users/bagpipes/Downloads/caifen/server1.rca.pem
+      middleCAFile: /Users/bagpipes/Downloads/caifen/server1.oca.pem 
       keyPassword: 12345678
    -  serverIp: 192.168.168.27
       serverPort: 8083
@@ -24,6 +26,3 @@ proxys:
       mode: ws
       ssl: false
       verifyClient: false
-      certFile: 
-      keyFile: 
-      keyPassword: 

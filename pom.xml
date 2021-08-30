@@ -44,6 +44,7 @@
 		<version>${logback.version}</version>
 	</dependency>
 	<!-- https://mvnrepository.com/artifact/com.aliyun/gmsse  -->
+	<!--
 	<dependency>
 	    <groupId>com.aliyun</groupId>
 	    <artifactId>gmsse</artifactId>
@@ -59,19 +60,19 @@
 	    <artifactId>gmjce</artifactId>
 	    <version>1.0</version>
 	</dependency>
-	<!--
+	-->
 	<dependency>
 	    <groupId>com.gmssl</groupId>
 	    <artifactId>gmssl_provider</artifactId>
 	    <version>1.0</version>
 	</dependency>
-	-->
+	<!--
 	<dependency>
 	    <groupId>org.bouncycastle</groupId>
 	    <artifactId>bcprov-jdk15on</artifactId>
 	    <version>1.69</version>
 	</dependency>
-	
+	-->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

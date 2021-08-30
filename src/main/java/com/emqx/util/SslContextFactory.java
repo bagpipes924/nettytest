@@ -1,5 +1,6 @@
 package com.emqx.util;
 
+import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
@@ -12,6 +13,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyStore;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 
 
 
@@ -23,6 +26,55 @@ public class SslContextFactory {
     private static SSLContext SERVER_CONTEXT;//服务器安全套接字协议
 
     private static SSLContext CLIENT_CONTEXT;//客户端安全套接字协议
+    
+    public static KeyStore createKeyStore(String keyStorePath, String password) throws Exception {
+
+        KeyStore keyStore = KeyStore.getInstance("PKCS12", "GMJSSE");
+        keyStore.load(new FileInputStream(keyStorePath), password.toCharArray());
+
+        return keyStore;
+    }
+    public static SSLContext getGMContext(String keyfile ,String rootCA,String middleCA,String passwd){
+    	SSLContext context=null;
+    	KeyStore keyStore=null;
+    	try {
+    		KeyManager[] kms = null;
+    		if(keyfile!=null) {
+    			keyStore=createKeyStore(keyfile, passwd);
+    			KeyManagerFactory kmf=KeyManagerFactory.getInstance("SunX509");
+    			kmf.init(keyStore, passwd.toCharArray());
+    			kms = kmf.getKeyManagers();
+    		}
+    		
+    		CertificateFactory cf = CertificateFactory.getInstance("X.509");
+    		KeyStore trustStore = KeyStore.getInstance("PKCS12","GMJCE");
+    		trustStore.load(null);
+    		if(rootCA!=null) {
+    			X509Certificate rca = (X509Certificate)cf.generateCertificate(new FileInputStream(rootCA));
+    			trustStore.setCertificateEntry("rca", rca);
+    		}
+    		if(middleCA!=null) {
+    			X509Certificate oca = (X509Certificate)cf.generateCertificate(new FileInputStream(middleCA));
+    			trustStore.setCertificateEntry("oca", oca);
+    		}
+    		if(rootCA==null&& middleCA==null) {
+    			trustStore=null;
+    		}
+    		TrustManager[] tms = { new TrustAllManager() };
+    		if(trustStore!=null) {
+    			TrustManagerFactory tmf = TrustManagerFactory.getInstance("SunX509");
+    			tmf.init(trustStore);
+    			tms = tmf.getTrustManagers();
+    		}
+    		context = SSLContext.getInstance("GMSSLv1.1", "GMJSSE");
+    		java.security.SecureRandom secureRandom = new java.security.SecureRandom();
+    		context.init(kms, tms, secureRandom);
+    		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return context;
+    }
 
     public static SSLContext getGMContext2(String keyfile ,String certFile,String passwd){
     	TrustManager[] trust = { new TrustAllManager() };
@@ -48,6 +100,7 @@ public class SslContextFactory {
 		}
     	return context;
     }
+
     public static SSLContext getGMContext(String keyfile ,String certFile,String passwd){
     	SSLContext context=null;
     	InputStream keyStream=null;

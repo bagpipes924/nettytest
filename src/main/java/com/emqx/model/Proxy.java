@@ -7,8 +7,9 @@ public class Proxy {
 	private boolean ssl;
 	private String mode="tcp";
 	private boolean verifyClient;
-	private String certFile;
-	private String keyFile;
+	private String pfxFile;
+	private String rootCAFile;
+	private String middleCAFile;
 	private String keyPassword;
 	
 
@@ -36,18 +37,7 @@ public class Proxy {
 	public void setSsl(boolean ssl) {
 		this.ssl = ssl;
 	}
-	public String getCertFile() {
-		return certFile;
-	}
-	public void setCertFile(String certFile) {
-		this.certFile = certFile;
-	}
-	public String getKeyFile() {
-		return keyFile;
-	}
-	public void setKeyFile(String keyFile) {
-		this.keyFile = keyFile;
-	}
+
 	public String getKeyPassword() {
 		return keyPassword;
 	}
@@ -66,6 +56,24 @@ public class Proxy {
 	}
 	public void setMode(String mode) {
 		this.mode = mode;
+	}
+	public String getPfxFile() {
+		return pfxFile;
+	}
+	public void setPfxFile(String pfxFile) {
+		this.pfxFile = pfxFile;
+	}
+	public String getRootCAFile() {
+		return rootCAFile;
+	}
+	public void setRootCAFile(String rootCAFile) {
+		this.rootCAFile = rootCAFile;
+	}
+	public String getMiddleCAFile() {
+		return middleCAFile;
+	}
+	public void setMiddleCAFile(String middleCAFile) {
+		this.middleCAFile = middleCAFile;
 	}
 
 	
